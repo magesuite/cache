@@ -1,0 +1,8 @@
+<div class="additional-cache-management cs-csfeature__logo">
+    <h2><span><?= $block->escapeHtml(__('Flush cache by tag/URL')) ?></span></h2>
+    <div style="clear: both;">
+        <form action="<?= $this->getUrl('cache_clear/cache/clear') ?>">
+            <?= $block->getChildHtml() ?>
+        </form>
+    </div>
+</div>
