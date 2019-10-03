@@ -9,7 +9,7 @@
                    template="MageSuite_Cache::cache/clear.phtml"
                    after="cache.additional"
             >
-                <block class="\MageSuite\Cache\Block\Adminhtml\Cache\Form" name="cache.clear.form" />
+                <block class="MageSuite\Cache\Block\Adminhtml\Cache\Form" name="cache.clear.form" />
             </block>
         </referenceContainer>
     </body>
