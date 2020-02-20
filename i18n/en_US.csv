@@ -1,0 +1,6 @@
+Tag,Tag
+URL,URL
+Flush,Flush
+"Cache for specified tag/URL was successfully flushed","Cache for specified tag/URL was successfully flushed"
+"There was an error when clearing cache: %1","There was an error when clearing cache: %1"
+"Flush cache by tag/URL","Flush cache by tag/URL"

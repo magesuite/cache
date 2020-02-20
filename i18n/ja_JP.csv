@@ -1,0 +1,6 @@
+Tag,タグ
+URL,URL
+Flush,消去
+"Cache for specified tag/URL was successfully flushed","指定されたタグ/URLのキャッシュをフラッシュしました"
+"There was an error when clearing cache: %1","キャッシュのクリア中にエラーが発生しました: %1"
+"Flush cache by tag/URL","tag/URLを指定してキャッシュクリア"
