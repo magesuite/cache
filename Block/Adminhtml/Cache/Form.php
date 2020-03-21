@@ -50,7 +50,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'type' => 'submit',
                 'name' => 'submit',
                 'class' => 'action-default',
-                'label' => __(''),
+                'label' => __('Flush'),
                 'value' => 'Flush',
                 'title' => __('Flush'),
                 'required' => false
