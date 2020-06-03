@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="system">
+            <group id="cache_cleanup_debugger" translate="label" type="text" sortOrder="1200" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Cache Cleanup Debugger</label>
+                <field id="is_logging_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enables logging all cache cleanups along with stacktraces to var/log/cache_cleanup.log file.</comment>
+                </field>
+                <field id="is_block_tags_preview_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Layout Blocks Cache Tags Preview</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When enabled after adding "show_block_identities=true" to page URL parameters, source code will contain HTML comment with list of all layout blocks and their respective cache tags.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <system>
+            <cache_cleanup_debugger>
+                <is_logging_enabled>0</is_logging_enabled>
+                <is_block_tags_preview_enabled>0</is_block_tags_preview_enabled>
+            </cache_cleanup_debugger>
+        </system>
+    </default>
+</config>

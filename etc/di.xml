@@ -8,4 +8,26 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Framework\App\Cache">
+        <plugin name="log_tags_cleanup" type="MageSuite\Cache\Plugin\Framework\App\Cache\LogTagsCleanup" />
+    </type>
+
+    <virtualType name="TagCleanupLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="error" xsi:type="object">MageSuite\Cache\Logger\TagCleanupLogHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageSuite\Cache\Plugin\Framework\App\Cache\LogTagsCleanup">
+        <arguments>
+            <argument name="logger" xsi:type="object">TagCleanupLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Layout">
+        <plugin name="display_cache_tags_per_block" type="MageSuite\Cache\Plugin\Framework\View\Layout\DisplayCacheTagsPerBlock"/>
+    </type>
 </config>
