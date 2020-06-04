@@ -35,21 +35,21 @@ class DisplayCacheTagsPerBlock
             return $result;
         }
 
-        echo '<!-- CACHE_DEBUGGER_START '.PHP_EOL;
+        $output = '<!-- CACHE_DEBUGGER_START '.PHP_EOL;
 
         foreach ($subject->getAllBlocks() as $block) {
             if ($block instanceof \Magento\Framework\DataObject\IdentityInterface) {
                 $identities = array_unique($block->getIdentities());
 
                 if(!empty($identities)) {
-                    echo $block->getNameInLayout() . ': ' . implode(', ', $identities).PHP_EOL;
-                    echo '--------------------------------------------'.PHP_EOL;
+                    $output .= $block->getNameInLayout() . ': ' . implode(', ', $identities).PHP_EOL;
+                    $output .= '--------------------------------------------'.PHP_EOL;
                 }
             }
         }
 
-        echo 'CACHE_DEBUGGER_END -->'.PHP_EOL;
+        $output .= 'CACHE_DEBUGGER_END -->'.PHP_EOL;
 
-        return $result;
+        return $output.$result;
     }
 }

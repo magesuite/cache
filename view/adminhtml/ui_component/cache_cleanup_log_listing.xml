@@ -38,11 +38,11 @@
                 <label translate="true">Date</label>
             </settings>
         </column>
-        <column name="tags" sortOrder="20">
+        <column name="entities" sortOrder="20">
             <settings>
                 <filter>text</filter>
                 <dataType>text</dataType>
-                <label translate="true">Cleared tags</label>
+                <label translate="true">Cleared entities</label>
             </settings>
         </column>
         <column name="stack_trace" sortOrder="30">

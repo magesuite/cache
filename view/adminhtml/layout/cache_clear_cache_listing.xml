@@ -2,6 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
+            <block template="MageSuite_Cache::cache/modal.phtml"/>
             <uiComponent name="cache_cleanup_log_listing"/>
         </referenceContainer>
     </body>

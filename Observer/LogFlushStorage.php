@@ -1,11 +1,9 @@
 <?php
 
-namespace MageSuite\Cache\Plugin\Framework\App\Cache;
+namespace MageSuite\Cache\Observer;
 
-class LogTagsCleanup
+class LogFlushStorage implements \Magento\Framework\Event\ObserverInterface
 {
-    const BATCH_SIZE = 1000;
-
     /**
      * @var \Psr\Log\LoggerInterface
      */
@@ -32,30 +30,21 @@ class LogTagsCleanup
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
     }
 
-    public function afterClean(\Magento\Framework\App\Cache $subject, $result, $tags = [])
+    /**
+     * @inheritDoc
+     */
+    public function execute(\Magento\Framework\Event\Observer $observer)
     {
         if(!$this->configuration->isLoggingEnabled()) {
-            return $result;
+            return;
         }
-
-        if(!is_array($tags)) {
-            $tags = [$tags];
-        }
-
-        $tags = array_unique($tags);
 
         $stackTrace = $this->getStackTrace();
         $data = $this->generateBasicCleanupLogData->execute($stackTrace);
 
-        $batches = array_chunk($tags, self::BATCH_SIZE);
+        $data['flush_storage'] = true;
 
-        foreach ($batches as $tagsBatch) {
-            $data['tags'] = $tagsBatch;
-
-            $this->logger->debug('cache_clear', $data);
-        }
-
-        return $result;
+        $this->logger->debug('cache_clear', $data);
     }
 
     protected function getStackTrace()

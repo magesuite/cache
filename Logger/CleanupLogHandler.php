@@ -2,7 +2,7 @@
 
 namespace MageSuite\Cache\Logger;
 
-class TagCleanupLogHandler extends \Magento\Framework\Logger\Handler\Base
+class CleanupLogHandler extends \Magento\Framework\Logger\Handler\Base
 {
     protected $loggerType = \Monolog\Logger::DEBUG;
 

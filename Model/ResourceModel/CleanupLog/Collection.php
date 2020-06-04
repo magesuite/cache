@@ -69,7 +69,7 @@ class Collection extends \Magento\Framework\Data\Collection
 
             foreach ($logContents as $line) {
                 $dataObject = new \Magento\Framework\DataObject();
-                $data = $lineParser->parse($line);
+                $data = $lineParser->parse($line, 365 * 1000);
 
                 if (empty($data)) {
                     continue;
@@ -80,7 +80,7 @@ class Collection extends \Magento\Framework\Data\Collection
                 $id = md5($command) . '_' . ($from + $iterator);
                 $dataObject->setId($id);
                 $dataObject->setDate($data['date']);
-                $dataObject->setTags(isset($data['context']['tags']) ? implode(' ', $data['context']['tags']) : '');
+                $dataObject->setEntities($this->getEntities($data));
                 $dataObject->setExtra($this->getExtra($data));
                 $dataObject->setStackTrace($this->getStackTrace($data, $id));
 
@@ -129,47 +129,40 @@ class Collection extends \Magento\Framework\Data\Collection
     protected function getStackTrace($data, $id)
     {
         $stackTraceIdentifier = $data['context']['stack_trace_identifier'];
-        $htmlElementId = $stackTraceIdentifier.'_'.$id;
+        $htmlElementId = $stackTraceIdentifier . '_' . $id;
         $stackTrace = nl2br($this->stackTraceRepository->get($stackTraceIdentifier));
 
         return <<<HTML
-                <a id="open-stacktrace-{$htmlElementId}">Show stacktrace</a>
+                <a onclick="javascript: openStacktrace('$htmlElementId')">Show stacktrace</a>
                 <div id="stacktrace-modal-{$htmlElementId}" style="display:none;">
                     {$stackTrace}
                 </div>
-                <script type="text/javascript">
-                require(
-                    [
-                        'jquery',
-                        'Magento_Ui/js/modal/modal'
-                    ],
-                    function (
-                        $,
-                        modal
-                    ) {
-                        var options = {
-                            type: 'popup',
-                            title: 'Stack trace',
-                            buttons: [{
-                                text: $.mage.__('Close'),
-                                class: '',
-                                click: function () {
-                                    this.closeModal();
-                                }
-                            }]
-                        };
 
-                        modal(options, $('#stacktrace-modal-{$htmlElementId}'));
-
-                        console.log('test');
-
-                        $("#open-stacktrace-{$htmlElementId}").on('click', function () {
-                            $("#stacktrace-modal-{$htmlElementId}").modal("openModal");
-                        });
-
-                    }
-                );
-                </script>
 HTML;
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    public function getEntities(array $data): string
+    {
+        if (isset($data['context']['tags'])) {
+            return sprintf('Tags: %s', implode(' ', $data['context']['tags']));
+        }
+
+        if (isset($data['context']['cache_type'])) {
+            return sprintf('Cache type: %s', $data['context']['cache_type']);
+        }
+
+        if (isset($data['context']['flush_magento'])) {
+            return sprintf('Flush Magento');
+        }
+
+        if (isset($data['context']['flush_storage'])) {
+            return sprintf('Flush Storage');
+        }
+
+        return '';
     }
 }

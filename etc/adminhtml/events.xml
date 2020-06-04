@@ -1,0 +1,8 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="adminhtml_cache_flush_all">
+        <observer name="log_flush_storage" instance="MageSuite\Cache\Observer\LogFlushStorage" />
+    </event>
+    <event name="adminhtml_cache_flush_system">
+        <observer name="log_flush_magento" instance="MageSuite\Cache\Observer\LogFlushSystem" />
+    </event>
+</config>

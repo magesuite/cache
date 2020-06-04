@@ -2,10 +2,8 @@
 
 namespace MageSuite\Cache\Plugin\Framework\App\Cache;
 
-class LogTagsCleanup
+class LogTypeCleanup
 {
-    const BATCH_SIZE = 1000;
-
     /**
      * @var \Psr\Log\LoggerInterface
      */
@@ -32,28 +30,18 @@ class LogTagsCleanup
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
     }
 
-    public function afterClean(\Magento\Framework\App\Cache $subject, $result, $tags = [])
+    public function afterCleanType(\Magento\Framework\App\Cache\TypeListInterface $subject, $result, $typeCode)
     {
         if(!$this->configuration->isLoggingEnabled()) {
             return $result;
         }
 
-        if(!is_array($tags)) {
-            $tags = [$tags];
-        }
-
-        $tags = array_unique($tags);
-
         $stackTrace = $this->getStackTrace();
+
         $data = $this->generateBasicCleanupLogData->execute($stackTrace);
+        $data['cache_type'] = $typeCode;
 
-        $batches = array_chunk($tags, self::BATCH_SIZE);
-
-        foreach ($batches as $tagsBatch) {
-            $data['tags'] = $tagsBatch;
-
-            $this->logger->debug('cache_clear', $data);
-        }
+        $this->logger->debug('cache_clear', $data);
 
         return $result;
     }
