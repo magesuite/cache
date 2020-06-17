@@ -25,8 +25,7 @@ class LogTagsCleanup
         \Psr\Log\LoggerInterface $logger,
         \MageSuite\Cache\Helper\Configuration $configuration,
         \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData
-    )
-    {
+    ) {
         $this->logger = $logger;
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
@@ -34,11 +33,11 @@ class LogTagsCleanup
 
     public function afterClean(\Magento\Framework\App\Cache $subject, $result, $tags = [])
     {
-        if(!$this->configuration->isLoggingEnabled()) {
+        if (!$this->configuration->isLoggingEnabled()) {
             return $result;
         }
 
-        if(!is_array($tags)) {
+        if (!is_array($tags)) {
             $tags = [$tags];
         }
 
@@ -52,7 +51,7 @@ class LogTagsCleanup
         foreach ($batches as $tagsBatch) {
             $data['tags'] = $tagsBatch;
 
-            $this->logger->debug('cache_clear', $data);
+            $this->logger->info('cache_clear', $data);
         }
 
         return $result;

@@ -19,19 +19,18 @@ class DisplayCacheTagsPerBlock
     public function __construct(
         \MageSuite\Cache\Helper\Configuration $configuration,
         \Magento\Framework\App\Request\Http $request
-    )
-    {
+    ) {
         $this->configuration = $configuration;
         $this->request = $request;
     }
 
     public function afterGetOutput(\Magento\Framework\View\Layout $subject, $result)
     {
-        if(!$this->configuration->isBlockTagsPreviewEnabled()) {
+        if (!$this->configuration->isBlockTagsPreviewEnabled()) {
             return $result;
         }
 
-        if($this->request->getParam(self::REQUEST_PARAM_NAME, false) == false)  {
+        if ($this->request->getParam(self::REQUEST_PARAM_NAME, false) == false) {
             return $result;
         }
 
@@ -41,7 +40,7 @@ class DisplayCacheTagsPerBlock
             if ($block instanceof \Magento\Framework\DataObject\IdentityInterface) {
                 $identities = array_unique($block->getIdentities());
 
-                if(!empty($identities)) {
+                if (!empty($identities)) {
                     $output .= $block->getNameInLayout() . ': ' . implode(', ', $identities).PHP_EOL;
                     $output .= '--------------------------------------------'.PHP_EOL;
                 }

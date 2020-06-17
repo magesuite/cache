@@ -18,8 +18,7 @@ class Collection extends \Magento\Framework\Data\Collection
         \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone,
         \MageSuite\Cache\Model\StackTraceRepository $stackTraceRepository
-    )
-    {
+    ) {
         $this->timezone = $timezone;
         $this->stackTraceRepository = $stackTraceRepository;
 
@@ -88,11 +87,7 @@ class Collection extends \Magento\Framework\Data\Collection
 
                 $iterator++;
             }
-
-            return $this;
         }
-
-        return $this;
     }
 
     protected function getExtra($data)

@@ -17,8 +17,7 @@ class GenerateBasicCleanupLogData
     public function __construct(
         \MageSuite\Cache\Model\StackTraceRepository $stackTraceRepository,
         \Magento\Backend\Model\Auth\Session $authSession
-    )
-    {
+    ) {
         $this->stackTraceRepository = $stackTraceRepository;
         $this->authSession = $authSession;
     }

@@ -2,7 +2,7 @@
 
 namespace MageSuite\Cache\Helper;
 
-class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
+class Configuration
 {
     const XML_PATH_CACHE_CLEANUP_DEBUGGER_CONFIGURATION = 'system/cache_cleanup_debugger';
 
@@ -14,11 +14,8 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
     protected $config = null;
 
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfigInterface
     ) {
-        parent::__construct($context);
-
         $this->scopeConfig = $scopeConfigInterface;
     }
 
@@ -34,7 +31,7 @@ class Configuration extends \Magento\Framework\App\Helper\AbstractHelper
 
     protected function getConfig()
     {
-        if($this->config === null){
+        if ($this->config === null) {
             $this->config = new \Magento\Framework\DataObject(
                 $this->scopeConfig->getValue(self::XML_PATH_CACHE_CLEANUP_DEBUGGER_CONFIGURATION)
             );

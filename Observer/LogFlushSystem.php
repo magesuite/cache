@@ -23,8 +23,7 @@ class LogFlushSystem implements \Magento\Framework\Event\ObserverInterface
         \Psr\Log\LoggerInterface $logger,
         \MageSuite\Cache\Helper\Configuration $configuration,
         \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData
-    )
-    {
+    ) {
         $this->logger = $logger;
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
@@ -35,7 +34,7 @@ class LogFlushSystem implements \Magento\Framework\Event\ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        if(!$this->configuration->isLoggingEnabled()) {
+        if (!$this->configuration->isLoggingEnabled()) {
             return;
         }
 
@@ -44,7 +43,7 @@ class LogFlushSystem implements \Magento\Framework\Event\ObserverInterface
 
         $data['flush_magento'] = true;
 
-        $this->logger->debug('cache_clear', $data);
+        $this->logger->info('cache_clear', $data);
     }
 
     protected function getStackTrace()

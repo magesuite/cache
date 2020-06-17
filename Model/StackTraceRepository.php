@@ -38,8 +38,9 @@ class StackTraceRepository
         $this->stackTracesCache[$identifier] = true;
     }
 
-    public function get($identifier) {
-        if(!isset($this->stackTracesContentCache[$identifier])) {
+    public function get($identifier)
+    {
+        if (!isset($this->stackTracesContentCache[$identifier])) {
             $this->stackTracesContentCache[$identifier] = file_get_contents(BP.'/var/log/stacktrace/'.$identifier.'.txt');
         }
 

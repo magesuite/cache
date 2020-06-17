@@ -23,8 +23,7 @@ class LogTypeCleanup
         \Psr\Log\LoggerInterface $logger,
         \MageSuite\Cache\Helper\Configuration $configuration,
         \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData
-    )
-    {
+    ) {
         $this->logger = $logger;
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
@@ -32,7 +31,7 @@ class LogTypeCleanup
 
     public function afterCleanType(\Magento\Framework\App\Cache\TypeListInterface $subject, $result, $typeCode)
     {
-        if(!$this->configuration->isLoggingEnabled()) {
+        if (!$this->configuration->isLoggingEnabled()) {
             return $result;
         }
 
@@ -41,7 +40,7 @@ class LogTypeCleanup
         $data = $this->generateBasicCleanupLogData->execute($stackTrace);
         $data['cache_type'] = $typeCode;
 
-        $this->logger->debug('cache_clear', $data);
+        $this->logger->info('cache_clear', $data);
 
         return $result;
     }
