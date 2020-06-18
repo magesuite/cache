@@ -18,8 +18,7 @@ class Clear extends \Magento\Backend\App\Action
         \Magento\Backend\App\Action\Context $context,
         \MageSuite\Cache\Service\CacheCleaner $cacheCleaner,
         \MageSuite\Cache\Helper\Url $url
-    )
-    {
+    ) {
         parent::__construct($context);
 
         $this->cacheCleaner = $cacheCleaner;
@@ -37,8 +36,7 @@ class Clear extends \Magento\Backend\App\Action
             $this->cacheCleaner->cleanByTags($tags);
 
             $this->messageManager->addSuccess(__('Cache for specified tag/URL was successfully flushed'));
-        }
-        catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             $this->messageManager->addError(__('There was an error when clearing cache: %1', $exception->getMessage()));
         }
 
@@ -49,11 +47,11 @@ class Clear extends \Magento\Backend\App\Action
     {
         $tags = [];
 
-        if(isset($params['tag'])) {
+        if (isset($params['tag'])) {
             $tags += explode(',', $params['tag']);
         }
 
-        if(isset($params['url'])) {
+        if (isset($params['url'])) {
             $url = $params['url'];
             $url = $this->url->normalize($url);
 

@@ -51,6 +51,4 @@ class ClearCacheByTagTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('Cache containing tag "remove_from_cache_tag" was cleared.'.PHP_EOL, $this->tester->getDisplay());
     }
-
 }
-

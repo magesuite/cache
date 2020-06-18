@@ -1,15 +1,20 @@
 {
-  "name": "creativestyle/magesuite-cache",
-  "description": "Improvements to built-in Magento 2 cache functionality",
-  "type": "magento2-module",
-  "license": [
-    "OSL-3.0",
-    "AFL-3.0"
-  ],
-  "autoload": {
-    "files": [ "registration.php" ],
-    "psr-4": {
-      "MageSuite\\Cache\\": ""
+    "name": "creativestyle/magesuite-cache",
+    "description": "Improvements to built-in Magento 2 cache functionality",
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "ddtraceweb/monolog-parser": "^1.2"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageSuite\\Cache\\": ""
+        }
     }
-  }
 }

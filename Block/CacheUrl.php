@@ -13,8 +13,7 @@ class CacheUrl extends \Magento\Framework\View\Element\AbstractBlock implements 
         \Magento\Framework\View\Element\Context $context,
         \MageSuite\Cache\Helper\Url $urlHelper,
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($context, $data);
 
         $this->urlHelper = $urlHelper;

@@ -4,4 +4,3 @@
     'MageSuite_Cache',
     __DIR__
 );
-
