@@ -32,8 +32,10 @@ class Configuration
     protected function getConfig()
     {
         if ($this->config === null) {
+        	$options = $this->scopeConfig->getValue(self::XML_PATH_CACHE_CLEANUP_DEBUGGER_CONFIGURATION);
+        	$options = is_array($options)?$options:[];
             $this->config = new \Magento\Framework\DataObject(
-                $this->scopeConfig->getValue(self::XML_PATH_CACHE_CLEANUP_DEBUGGER_CONFIGURATION)
+                $options
             );
         }
 
