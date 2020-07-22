@@ -106,6 +106,10 @@ class Collection extends \Magento\Framework\Data\Collection
             $output .= 'Admin user: ' . $data['context']['admin_user'] . '<br>';
         }
 
+        if (isset($data['context']['full_page_cache_cleanup'])) {
+            $output .= 'Full page cache cleanup<br>';
+        }
+
         return $output;
     }
 

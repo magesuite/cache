@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="clean_cache_by_tags">
+        <observer name="log_full_page_cache_tags_cleanup" instance="MageSuite\Cache\Observer\LogFullPageCacheCleanup"/>
+    </event>
+</config>
