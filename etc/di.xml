@@ -44,6 +44,12 @@
         </arguments>
     </type>
 
+    <type name="MageSuite\Cache\Observer\LogFullPageCacheCleanup">
+        <arguments>
+            <argument name="logger" xsi:type="object">CleanupLogger</argument>
+        </arguments>
+    </type>
+
     <type name="MageSuite\Cache\Observer\LogFlushSystem">
         <arguments>
             <argument name="logger" xsi:type="object">CleanupLogger</argument>
