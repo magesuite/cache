@@ -24,7 +24,7 @@ class ClearCacheByTagTest extends \PHPUnit\Framework\TestCase
      */
     protected $cache;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $this->command = $this->objectManager->create(\MageSuite\Cache\Console\Command\ClearCacheByTag::class);
