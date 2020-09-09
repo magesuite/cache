@@ -5,37 +5,36 @@ namespace MageSuite\Cache\Model\Command;
 class GenerateBasicCleanupLogData
 {
     /**
-     * @var \MageSuite\Cache\Model\StackTraceRepository
-     */
-    protected $stackTraceRepository;
-
-    /**
      * @var \Magento\Backend\Model\Auth\Session
      */
     protected $authSession;
 
+    /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $url;
+
     public function __construct(
-        \MageSuite\Cache\Model\StackTraceRepository $stackTraceRepository,
-        \Magento\Backend\Model\Auth\Session $authSession
+        \Magento\Backend\Model\Auth\Session $authSession,
+        \Magento\Framework\UrlInterface $url
     ) {
-        $this->stackTraceRepository = $stackTraceRepository;
         $this->authSession = $authSession;
+        $this->url = $url;
     }
 
     public function execute($stackTrace)
     {
         $stackTrace = $this->getStackTraceAsString($stackTrace);
 
-        $stackTraceIdentifier = md5($stackTrace);
-        $this->stackTraceRepository->save($stackTrace, $stackTraceIdentifier);
-
         $data = [
-            'stack_trace_identifier' => $stackTraceIdentifier
+            'stack_trace' => $stackTrace
         ];
 
         if (PHP_SAPI === 'cli') {
             $data['cli'] = true;
             $data['command'] = isset($_SERVER['argv']) ? implode(' ', $_SERVER['argv']) : '';
+        } else {
+            $data['url'] = $this->url->getCurrentUrl();
         }
 
         if ($this->authSession->isLoggedIn() && $this->authSession->getUser()) {

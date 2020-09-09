@@ -5,11 +5,6 @@ namespace MageSuite\Cache\Plugin\Framework\App\Cache;
 class LogTypeCleanup
 {
     /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
-
-    /**
      * @var \MageSuite\Cache\Helper\Configuration
      */
     protected $configuration;
@@ -19,14 +14,19 @@ class LogTypeCleanup
      */
     protected $generateBasicCleanupLogData;
 
+    /**
+     * @var \MageSuite\Cache\Model\CleanupLogRepository
+     */
+    protected $cleanupLogRepository;
+
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
+        \MageSuite\Cache\Model\CleanupLogRepository $cleanupLogRepository,
         \MageSuite\Cache\Helper\Configuration $configuration,
         \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData
     ) {
-        $this->logger = $logger;
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
+        $this->cleanupLogRepository = $cleanupLogRepository;
     }
 
     public function afterCleanType(\Magento\Framework\App\Cache\TypeListInterface $subject, $result, $typeCode)
@@ -39,8 +39,9 @@ class LogTypeCleanup
 
         $data = $this->generateBasicCleanupLogData->execute($stackTrace);
         $data['cache_type'] = $typeCode;
+        $data['redis'] = true;
 
-        $this->logger->info('cache_clear', $data);
+        $this->cleanupLogRepository->save($data);
 
         return $result;
     }

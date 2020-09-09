@@ -7,11 +7,6 @@ class LogTagsCleanup
     const BATCH_SIZE = 1000;
 
     /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
-
-    /**
      * @var \MageSuite\Cache\Helper\Configuration
      */
     protected $configuration;
@@ -21,14 +16,19 @@ class LogTagsCleanup
      */
     protected $generateBasicCleanupLogData;
 
+    /**
+     * @var \MageSuite\Cache\Model\CleanupLogRepository
+     */
+    protected $cleanupLogRepository;
+
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
+        \MageSuite\Cache\Model\CleanupLogRepository $cleanupLogRepository,
         \MageSuite\Cache\Helper\Configuration $configuration,
         \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData
     ) {
-        $this->logger = $logger;
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
+        $this->cleanupLogRepository = $cleanupLogRepository;
     }
 
     public function afterClean(\Magento\Framework\App\Cache $subject, $result, $tags = [])
@@ -45,13 +45,14 @@ class LogTagsCleanup
 
         $stackTrace = $this->getStackTrace();
         $data = $this->generateBasicCleanupLogData->execute($stackTrace);
+        $data['redis'] = true;
 
         $batches = array_chunk($tags, self::BATCH_SIZE);
 
         foreach ($batches as $tagsBatch) {
             $data['tags'] = $tagsBatch;
 
-            $this->logger->info('cache_clear', $data);
+            $this->cleanupLogRepository->save($data);
         }
 
         return $result;
