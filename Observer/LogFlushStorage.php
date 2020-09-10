@@ -5,11 +5,6 @@ namespace MageSuite\Cache\Observer;
 class LogFlushStorage implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
-
-    /**
      * @var \MageSuite\Cache\Helper\Configuration
      */
     protected $configuration;
@@ -19,14 +14,19 @@ class LogFlushStorage implements \Magento\Framework\Event\ObserverInterface
      */
     protected $generateBasicCleanupLogData;
 
+    /**
+     * @var \MageSuite\Cache\Model\CleanupLogRepository
+     */
+    protected $cleanupLogRepository;
+
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
+        \MageSuite\Cache\Model\CleanupLogRepository $cleanupLogRepository,
         \MageSuite\Cache\Helper\Configuration $configuration,
         \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData
     ) {
-        $this->logger = $logger;
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
+        $this->cleanupLogRepository = $cleanupLogRepository;
     }
 
     /**
@@ -41,9 +41,10 @@ class LogFlushStorage implements \Magento\Framework\Event\ObserverInterface
         $stackTrace = $this->getStackTrace();
         $data = $this->generateBasicCleanupLogData->execute($stackTrace);
 
+        $data['redis'] = true;
         $data['flush_storage'] = true;
 
-        $this->logger->info('cache_clear', $data);
+        $this->cleanupLogRepository->save($data);
     }
 
     protected function getStackTrace()

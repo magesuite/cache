@@ -24,6 +24,11 @@ class Configuration
         return $this->getConfig()->getIsLoggingEnabled();
     }
 
+    public function getLoggingRetentionPeriod()
+    {
+        return $this->getConfig()->getLoggingRetentionPeriod();
+    }
+
     public function isBlockTagsPreviewEnabled()
     {
         return $this->getConfig()->getIsBlockTagsPreviewEnabled();

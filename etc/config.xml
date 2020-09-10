@@ -5,6 +5,7 @@
             <cache_cleanup_debugger>
                 <is_logging_enabled>0</is_logging_enabled>
                 <is_block_tags_preview_enabled>0</is_block_tags_preview_enabled>
+                <logging_retention_period>3</logging_retention_period>
             </cache_cleanup_debugger>
         </system>
     </default>
