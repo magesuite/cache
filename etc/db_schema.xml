@@ -12,9 +12,12 @@
     <table name="cache_cleanup_log_stacktrace" resource="default" engine="innodb" comment="Cache cleanups log stacktraces">
         <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Stacktrace ID"/>
         <column xsi:type="text" name="stacktrace" nullable="true" comment="Stacktrace"/>
-        <column xsi:type="text" name="hash" nullable="true" comment="Stacktrace unique hash"/>
+        <column xsi:type="varchar" name="hash" nullable="false" length="32" comment="Stacktrace unique hash"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>
+        <index referenceId="CACHE_CLEANUP_LOG_STACKTRACE_HASH" indexType="btree">
+            <column name="hash"/>
+        </index>
     </table>
 </schema>

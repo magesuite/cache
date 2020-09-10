@@ -65,6 +65,14 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $output .= 'Admin user: ' . $context['admin_user'] . '<br>';
         }
 
+        if (isset($context['object_class'])) {
+            $output .= 'Object class: ' . $context['object_class'] . '<br>';
+        }
+
+        if (isset($context['tag_resolving_strategy'])) {
+            $output .= 'Resolving strategy: ' . $context['tag_resolving_strategy'] . '<br>';
+        }
+
         return $output;
     }
 
@@ -85,6 +93,10 @@ HTML;
 
     protected function getType($context)
     {
+        if (isset($context['tag_registered_for_cleanup']) && $context['tag_registered_for_cleanup']) {
+            return '<span class="grid-severity-minor"><span>TAG REGISTRATION</span></span>';
+        }
+
         if (isset($context['varnish']) && $context['varnish']) {
             return '<span class="grid-severity-external"><span>VARNISH</span></span>';
         }

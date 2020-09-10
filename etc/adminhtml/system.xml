@@ -12,6 +12,10 @@
                 <field id="logging_retention_period" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Logging retention period</label>
                     <comment>How long (in days) logs should be kept</comment>
+                    <validate>validate-number validate-length maximum-length-4 validate-positive-number</validate>
+                    <depends>
+                        <field id="is_logging_enabled">1</field>
+                    </depends>
                 </field>
                 <field id="is_block_tags_preview_enabled" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Enable Layout Blocks Cache Tags Preview</label>

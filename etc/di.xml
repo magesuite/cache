@@ -13,47 +13,15 @@
         <plugin name="log_tags_cleanup" type="MageSuite\Cache\Plugin\Framework\App\Cache\LogTagsCleanup" />
     </type>
 
+    <type name="Magento\Framework\Indexer\CacheContext">
+        <plugin name="register_cache_tags"
+                type="MageSuite\Cache\Plugin\Indexer\CacheContextPlugin\LogEntityRegistration"
+        />
+    </type>
+
     <type name="Magento\Framework\App\Cache\TypeListInterface">
         <plugin name="log_type_cleanup"
                 type="MageSuite\Cache\Plugin\Framework\App\Cache\LogTypeCleanup"/>
-    </type>
-
-    <virtualType name="CleanupLogger" type="Magento\Framework\Logger\Monolog">
-        <arguments>
-            <argument name="handlers" xsi:type="array">
-                <item name="error" xsi:type="object">MageSuite\Cache\Logger\CleanupLogHandler</item>
-            </argument>
-        </arguments>
-    </virtualType>
-
-    <type name="MageSuite\Cache\Plugin\Framework\App\Cache\LogTagsCleanup">
-        <arguments>
-            <argument name="logger" xsi:type="object">CleanupLogger</argument>
-        </arguments>
-    </type>
-
-    <type name="MageSuite\Cache\Plugin\Framework\App\Cache\LogTypeCleanup">
-        <arguments>
-            <argument name="logger" xsi:type="object">CleanupLogger</argument>
-        </arguments>
-    </type>
-
-    <type name="MageSuite\Cache\Observer\LogFlushStorage">
-        <arguments>
-            <argument name="logger" xsi:type="object">CleanupLogger</argument>
-        </arguments>
-    </type>
-
-    <type name="MageSuite\Cache\Observer\LogFullPageCacheCleanup">
-        <arguments>
-            <argument name="logger" xsi:type="object">CleanupLogger</argument>
-        </arguments>
-    </type>
-
-    <type name="MageSuite\Cache\Observer\LogFlushSystem">
-        <arguments>
-            <argument name="logger" xsi:type="object">CleanupLogger</argument>
-        </arguments>
     </type>
 
     <type name="Magento\Framework\View\Layout">

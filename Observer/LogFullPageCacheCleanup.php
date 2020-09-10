@@ -29,16 +29,23 @@ class LogFullPageCacheCleanup implements \Magento\Framework\Event\ObserverInterf
      */
     protected $cleanupLogRepository;
 
+    /**
+     * @var \Magento\Framework\App\Cache\Tag\Strategy\Factory
+     */
+    protected $tagResolvingStrategy;
+
     public function __construct(
         \MageSuite\Cache\Model\CleanupLogRepository $cleanupLogRepository,
         \MageSuite\Cache\Helper\Configuration $configuration,
         \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData,
-        \Magento\Framework\App\Cache\Tag\Resolver $tagResolver
+        \Magento\Framework\App\Cache\Tag\Resolver $tagResolver,
+        \Magento\Framework\App\Cache\Tag\Strategy\Factory $tagResolvingStrategy
     ) {
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
         $this->tagResolver = $tagResolver;
         $this->cleanupLogRepository = $cleanupLogRepository;
+        $this->tagResolvingStrategy = $tagResolvingStrategy;
     }
 
     /**
@@ -51,6 +58,7 @@ class LogFullPageCacheCleanup implements \Magento\Framework\Event\ObserverInterf
         }
 
         $object = $observer->getEvent()->getObject();
+        $tagResolvingStrategy = $this->tagResolvingStrategy->getStrategy($object);
         $tags = $this->tagResolver->getTags($object);
 
         if(empty($tags)) {
@@ -60,6 +68,8 @@ class LogFullPageCacheCleanup implements \Magento\Framework\Event\ObserverInterf
         $stackTrace = $this->getStackTrace();
         $data = $this->generateBasicCleanupLogData->execute($stackTrace);
         $data['varnish'] = true;
+        $data['object_class'] = get_class($object);
+        $data['tag_resolving_strategy'] = get_class($tagResolvingStrategy);
 
         $batches = array_chunk($tags, \MageSuite\Cache\Plugin\Framework\App\Cache\LogTagsCleanup::BATCH_SIZE);
 
