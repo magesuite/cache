@@ -51,8 +51,8 @@ class CleanupLog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return parent::_beforeSave($object);
     }
 
-    protected function tableExist()
+    protected function tableExist($tableName)
     {
-        return $this->getConnection()->isTableExists($this->getConnection()->getTableName('cache_cleanup_log'));
+        return $this->getConnection()->isTableExists($this->getConnection()->getTableName($tableName));
     }
 }
