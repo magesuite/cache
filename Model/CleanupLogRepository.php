@@ -25,6 +25,10 @@ class CleanupLogRepository
 
     public function save($data)
     {
+        if(!$this->resourceModel->canSaveLog()) {
+            return;
+        }
+
         /** @var CleanupLog $cleanupLogEntry */
         $cleanupLogEntry = $this->cleanupLogEntryFactory->create();
         $cleanupLogEntry->setContext($data);

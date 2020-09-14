@@ -4,6 +4,8 @@ namespace MageSuite\Cache\Model\ResourceModel;
 
 class CleanupLog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
+    protected $tablesExist = null;
+
     /**
      * @var CleanupLogStacktrace
      */
@@ -25,6 +27,15 @@ class CleanupLog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_init('cache_cleanup_log', 'id');
     }
 
+    public function canSaveLog() {
+        if($this->tablesExist === null) {
+            $this->tablesExist = $this->tableExist('cache_cleanup_log') &&
+                $this->tableExist('cache_cleanup_log_stacktrace');
+        }
+
+        return $this->tablesExist;
+    }
+
     protected function _beforeSave(\Magento\Framework\Model\AbstractModel $object)
     {
         $context = $object->getContext();
@@ -38,5 +49,10 @@ class CleanupLog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $object->setStacktraceId($stackTraceId);
 
         return parent::_beforeSave($object);
+    }
+
+    protected function tableExist()
+    {
+        return $this->getConnection()->isTableExists($this->getConnection()->getTableName('cache_cleanup_log'));
     }
 }
