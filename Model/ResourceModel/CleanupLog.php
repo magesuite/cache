@@ -13,8 +13,8 @@ class CleanupLog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
-        $connectionName = null,
-        CleanupLogStacktrace $stacktraceResourceModel
+        CleanupLogStacktrace $stacktraceResourceModel,
+        $connectionName = null
     )
     {
         parent::__construct($context, $connectionName);
@@ -27,8 +27,9 @@ class CleanupLog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_init('cache_cleanup_log', 'id');
     }
 
-    public function canSaveLog() {
-        if($this->tablesExist === null) {
+    public function canSaveLog()
+    {
+        if ($this->tablesExist === null) {
             $this->tablesExist = $this->tableExist('cache_cleanup_log') &&
                 $this->tableExist('cache_cleanup_log_stacktrace');
         }
