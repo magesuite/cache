@@ -10,7 +10,7 @@ class LogTypeCleanup
     protected $configuration;
 
     /**
-     * @var \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData
+     * @var \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData\Proxy
      */
     protected $generateBasicCleanupLogData;
 
@@ -22,7 +22,7 @@ class LogTypeCleanup
     public function __construct(
         \MageSuite\Cache\Model\CleanupLogRepository $cleanupLogRepository,
         \MageSuite\Cache\Helper\Configuration $configuration,
-        \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData
+        \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData\Proxy $generateBasicCleanupLogData
     ) {
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
