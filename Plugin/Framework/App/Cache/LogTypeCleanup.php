@@ -10,7 +10,7 @@ class LogTypeCleanup
     protected $configuration;
 
     /**
-     * @var \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData\Proxy
+     * @var \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData
      */
     protected $generateBasicCleanupLogData;
 
@@ -22,7 +22,7 @@ class LogTypeCleanup
     public function __construct(
         \MageSuite\Cache\Model\CleanupLogRepository $cleanupLogRepository,
         \MageSuite\Cache\Helper\Configuration $configuration,
-        \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData\Proxy $generateBasicCleanupLogData
+        \MageSuite\Cache\Model\Command\GenerateBasicCleanupLogData $generateBasicCleanupLogData
     ) {
         $this->configuration = $configuration;
         $this->generateBasicCleanupLogData = $generateBasicCleanupLogData;
@@ -36,7 +36,6 @@ class LogTypeCleanup
         }
 
         $stackTrace = $this->getStackTrace();
-
         $data = $this->generateBasicCleanupLogData->execute($stackTrace);
         $data['cache_type'] = $typeCode;
         $data['redis'] = true;
