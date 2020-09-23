@@ -5,7 +5,7 @@ namespace MageSuite\Cache\Model\Command;
 class GenerateBasicCleanupLogData
 {
     /**
-     * @var \Magento\Backend\Model\Auth\Session
+     * @var \Magento\Backend\Model\Auth\Session\Proxy
      */
     protected $authSession;
 
@@ -14,16 +14,24 @@ class GenerateBasicCleanupLogData
      */
     protected $url;
 
+    /**
+     * @var \Magento\Framework\App\State
+     */
+    protected $state;
+
     public function __construct(
-        \Magento\Backend\Model\Auth\Session $authSession,
-        \Magento\Framework\UrlInterface $url
+        \Magento\Backend\Model\Auth\Session\Proxy $authSession,
+        \Magento\Framework\UrlInterface $url,
+        \Magento\Framework\App\State $state
     ) {
         $this->authSession = $authSession;
         $this->url = $url;
+        $this->state = $state;
     }
 
     public function execute($stackTrace)
     {
+
         $stackTrace = $this->getStackTraceAsString($stackTrace);
 
         $data = [
@@ -37,11 +45,20 @@ class GenerateBasicCleanupLogData
             $data['url'] = $this->url->getCurrentUrl();
         }
 
-        if ($this->authSession->isLoggedIn() && $this->authSession->getUser()) {
-            $data['admin_user'] = $this->authSession->getUser()->getUserName();
-        }
+        $data['admin_user'] = $this->state->emulateAreaCode(
+            \Magento\Framework\App\Area::AREA_GLOBAL,
+            [$this, 'getAdminNameFromSession']
+        );
 
         return $data;
+    }
+
+    public function getAdminNameFromSession(){
+        if ($this->authSession->isLoggedIn() && $this->authSession->getUser()) {
+            return $this->authSession->getUser()->getUserName();
+        }
+
+        return false;
     }
 
     /**
