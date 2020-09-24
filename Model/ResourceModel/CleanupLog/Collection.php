@@ -80,7 +80,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $output .= 'CLI: ' . $context['command'] . '<br>';
         }
 
-        if (isset($context['admin_user'])) {
+        if (isset($context['admin_user']) && !empty($context['admin_user'])) {
             $output .= 'Admin user: ' . $context['admin_user'] . '<br>';
         }
 
