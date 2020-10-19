@@ -1,0 +1,17 @@
+Tag,Tag
+URL,URL
+Flush,Flush
+"Cache for specified tag/URL was successfully flushed","Cache for specified tag/URL was successfully flushed"
+"There was an error when clearing cache: %1","There was an error when clearing cache: %1"
+"Cache clear log","Cache clear log"
+"Flush cache by tag/URL","Flush cache by tag/URL"
+Close,Close
+"Cache Cleanup Debugger","Cache Cleanup Debugger"
+"Enable Logging","Enable Logging"
+"Logging retention period","Logging retention period"
+"Enable Layout Blocks Cache Tags Preview","Enable Layout Blocks Cache Tags Preview"
+Date,Date
+"Cleared entities","Cleared entities"
+Type,Type
+Stacktrace,Stacktrace
+"Extra information","Extra information"
