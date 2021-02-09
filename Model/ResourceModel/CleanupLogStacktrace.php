@@ -44,8 +44,8 @@ class CleanupLogStacktrace extends \Magento\Framework\Model\ResourceModel\Db\Abs
         $select->from($this->getMainTable(), 'id');
         $select->where('hash = ?', $hash);
 
-        $row = $this->getConnection()->fetchRow($select);
+        $id = $this->getConnection()->fetchOne($select);
 
-        return $row === null ? null : $row['id'];
+        return $id ?: null;
     }
 }
