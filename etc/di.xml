@@ -14,17 +14,18 @@
     </type>
 
     <type name="Magento\Framework\Indexer\CacheContext">
-        <plugin name="register_cache_tags"
-                type="MageSuite\Cache\Plugin\Indexer\CacheContextPlugin\LogEntityRegistration"
-        />
+        <plugin name="register_cache_tags" type="MageSuite\Cache\Plugin\Indexer\CacheContextPlugin\LogEntityRegistration"/>
     </type>
 
     <type name="Magento\Framework\App\Cache\TypeListInterface">
-        <plugin name="log_type_cleanup"
-                type="MageSuite\Cache\Plugin\Framework\App\Cache\LogTypeCleanup"/>
+        <plugin name="log_type_cleanup" type="MageSuite\Cache\Plugin\Framework\App\Cache\LogTypeCleanup"/>
     </type>
 
     <type name="Magento\Framework\View\Layout">
         <plugin name="display_cache_tags_per_block" type="MageSuite\Cache\Plugin\Framework\View\Layout\DisplayCacheTagsPerBlock"/>
+    </type>
+
+    <type name="Magento\InventoryCache\Plugin\InventoryIndexer\Indexer\SourceItem\Strategy\Sync\CacheFlush">
+        <plugin name="add_tag_for_configurable_products" type="MageSuite\Cache\Plugin\InventoryCache\Plugin\InventoryIndexer\Indexer\SourceItem\Strategy\Sync\CacheFlush\CacheFlushForConfigurableProducts"/>
     </type>
 </config>
