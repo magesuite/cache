@@ -7,7 +7,10 @@
         "AFL-3.0"
     ],
     "require": {
-        "ddtraceweb/monolog-parser": "^1.2"
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "magento/module-inventory-cache": "*"
+        "magento/module-ui": "*"
     },
     "autoload": {
         "files": [
