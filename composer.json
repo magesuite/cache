@@ -6,9 +6,6 @@
         "OSL-3.0",
         "AFL-3.0"
     ],
-    "require": {
-        "ddtraceweb/monolog-parser": "^1.2"
-    },
     "autoload": {
         "files": [
             "registration.php"
