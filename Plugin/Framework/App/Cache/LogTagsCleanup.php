@@ -49,6 +49,11 @@ class LogTagsCleanup
 
         $batches = array_chunk($tags, self::BATCH_SIZE);
 
+        if(empty($tags)) {
+            $data['empty_tags'] = true;
+            $this->cleanupLogRepository->save($data);
+        }
+
         foreach ($batches as $tagsBatch) {
             $data['tags'] = $tagsBatch;
 
