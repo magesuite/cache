@@ -70,12 +70,12 @@ class CacheFlushForConfigurableProducts
                 ['product' => $this->resource->getTableName(self::PRODUCT_TABLE_NAME)],
                 'source_item.' . \Magento\InventoryApi\Api\Data\SourceItemInterface::SKU . ' = product.sku',
                 []
-            )->joinLeft(
+            )->join(
                 ['configurable' => $this->resource->getTableName(self::PRODUCT_CONFIGURABLE_RELATION_TABLE)],
                 'configurable.product_id = product.' . $this->getProductEntityLinkField(),
                 ['configurable.parent_id']
             )->distinct();
-        
+
         return $connection->fetchCol($select);
     }
 
