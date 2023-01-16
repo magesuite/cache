@@ -1,0 +1,19 @@
+<div class="quick-search-buttons" style="margin-bottom: 15px">
+    <button class="primary">cat_p"</button>
+    <button class="primary">cat_c"</button>
+    <button class="primary">empty_tags</button>
+    <button class="primary">BLOCK_HTML</button>
+    <button class="primary">cat_b"</button>
+</div>
+<script type="text/javascript">
+    require(
+        ['jquery'],
+        function ($) {
+            $('.quick-search-buttons button').click(function() {
+                $('#fulltext').val($(this).text())
+                $('#fulltext').trigger('change')
+                $('button.action-submit').trigger('click')
+            });
+        }
+    );
+</script>
