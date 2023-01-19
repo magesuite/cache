@@ -51,7 +51,7 @@ class Clear extends \Magento\Backend\App\Action
             $tags += explode(',', $params['tag']);
         }
 
-        if (isset($params['url'])) {
+        if (isset($params['url']) && !empty($params['url'])) {
             $url = $params['url'];
             $url = $this->url->normalize($url);
 
