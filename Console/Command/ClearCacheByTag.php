@@ -38,5 +38,7 @@ class ClearCacheByTag extends \Symfony\Component\Console\Command\Command
         $this->cacheCleaner->cleanByTags([$tag]);
 
         $output->writeln(sprintf('Cache containing tag "%s" was cleared.', $tag));
+
+        return 1;
     }
 }
