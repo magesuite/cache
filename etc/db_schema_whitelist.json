@@ -1,0 +1,26 @@
+{
+    "cache_cleanup_log": {
+        "column": {
+            "id": true,
+            "context": true,
+            "executed_at": true,
+            "stacktrace_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "cache_cleanup_log_stacktrace": {
+        "column": {
+            "id": true,
+            "stacktrace": true,
+            "hash": true
+        },
+        "index": {
+            "CACHE_CLEANUP_LOG_STACKTRACE_HASH": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
