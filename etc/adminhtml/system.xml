@@ -24,5 +24,15 @@
                 </field>
             </group>
         </section>
+        <section id="product_performance">
+            <group id="cache" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Cache</label>
+                <field id="enable_layout_handle_for_entity" translate="label comment" type="select" sortOrder="10" showInDefault="1">
+                    <label>Enable layout handle for entity</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[When disabled, entity handle like catalog_product_view_id_{ID}, catalog_category_view_id_{ID} will not be added.]]></comment>
+                </field>
+            </group>
+        </section>
     </system>
 </config>

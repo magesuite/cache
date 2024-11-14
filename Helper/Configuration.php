@@ -4,7 +4,8 @@ namespace MageSuite\Cache\Helper;
 
 class Configuration
 {
-    const XML_PATH_CACHE_CLEANUP_DEBUGGER_CONFIGURATION = 'system/cache_cleanup_debugger';
+    public const XML_PATH_CACHE_CLEANUP_DEBUGGER_CONFIGURATION = 'system/cache_cleanup_debugger';
+    public const XML_PATH_PRODUCT_PERFORMANCE_CACHE_ENABLE_LAYOUT_FOR_ENTITY = 'product_performance/cache/enable_layout_handle_for_entity';
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -32,6 +33,11 @@ class Configuration
     public function isBlockTagsPreviewEnabled()
     {
         return $this->getConfig()->getIsBlockTagsPreviewEnabled();
+    }
+
+    public function isEntityLayoutHandleEnabled()
+    {
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_PRODUCT_PERFORMANCE_CACHE_ENABLE_LAYOUT_FOR_ENTITY);
     }
 
     protected function getConfig()
