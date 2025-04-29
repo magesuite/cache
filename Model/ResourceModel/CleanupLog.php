@@ -14,7 +14,7 @@ class CleanupLog extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     public function __construct(
         \Magento\Framework\Model\ResourceModel\Db\Context $context,
         CleanupLogStacktrace $stacktraceResourceModel,
-        $connectionName = null
+        ?string $connectionName = null
     )
     {
         parent::__construct($context, $connectionName);
