@@ -25,6 +25,6 @@ class ClearCacheSearchAjaxSuggest extends \Symfony\Component\Console\Command\Com
 
         $output->writeln(sprintf('Cache for "%s" URL was cleared.', \MageSuite\Cache\Service\CacheCleanSearchAjaxSuggest::CACHE_TAG));
 
-        return 1;
+        return \Magento\Framework\Console\Cli::RETURN_SUCCESS;
     }
 }
