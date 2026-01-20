@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="search_ajax_suggest" translate="label,description" instance="MageSuite\Cache\Model\Cache\Type\SearchAjaxSuggest">
+        <label>Search Ajax Suggest</label>
+        <description>Search Ajax Suggest cache (Varnish only)</description>
+    </type>
+</config>

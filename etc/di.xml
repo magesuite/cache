@@ -5,7 +5,6 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="cache_clean_by_tag" xsi:type="object">MageSuite\Cache\Console\Command\ClearCacheByTag</item>
-                <item name="cache_clean_search_ajax_suggest" xsi:type="object">MageSuite\Cache\Console\Command\ClearCacheSearchAjaxSuggest</item>
             </argument>
         </arguments>
     </type>

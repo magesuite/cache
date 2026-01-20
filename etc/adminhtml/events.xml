@@ -4,5 +4,6 @@
     </event>
     <event name="adminhtml_cache_flush_system">
         <observer name="log_flush_magento" instance="MageSuite\Cache\Observer\LogFlushSystem" />
+        <observer name="purge_search_ajax_suggest" instance="MageSuite\Cache\Observer\PurgeSearchAjaxSuggestAfterFlushSystem" />
     </event>
 </config>
