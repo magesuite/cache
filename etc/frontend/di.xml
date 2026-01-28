@@ -3,4 +3,7 @@
     <type name="Magento\Framework\View\Result\Page">
         <plugin name="remove_entity_cache" type="MageSuite\Cache\Plugin\Framework\View\Result\Page\RemoveEntityCache" sortOrder="10"/>
     </type>
+    <type name="Magento\Search\Controller\Ajax\Suggest">
+        <plugin name="add_cache_tag_to_response" type="MageSuite\Cache\Plugin\Magento\Search\Controller\Ajax\Suggest\AddCacheTagToResponse" sortOrder="10"/>
+    </type>
 </config>
