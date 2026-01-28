@@ -22,6 +22,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>When enabled after adding "show_block_identities=true" to page URL parameters, source code will contain HTML comment with list of all layout blocks and their respective cache tags.</comment>
                 </field>
+                <fieldset_css>cs-csfeature__logo</fieldset_css>
             </group>
         </section>
         <section id="product_performance">
