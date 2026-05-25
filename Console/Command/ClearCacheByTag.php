@@ -32,13 +32,13 @@ class ClearCacheByTag extends \Symfony\Component\Console\Command\Command
     protected function execute(
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
-    ) {
+    ): int {
         $tag = $input->getArgument('tag');
 
         $this->cacheCleaner->cleanByTags([$tag]);
 
         $output->writeln(sprintf('Cache containing tag "%s" was cleared.', $tag));
 
-        return 1;
+        return \Symfony\Component\Console\Command\Command::SUCCESS;
     }
 }
