@@ -39,6 +39,6 @@ class ClearCacheByTag extends \Symfony\Component\Console\Command\Command
 
         $output->writeln(sprintf('Cache containing tag "%s" was cleared.', $tag));
 
-        return \Symfony\Component\Console\Command\Command::SUCCESS;
+        return \Magento\Framework\Console\Cli::RETURN_SUCCESS;
     }
 }
